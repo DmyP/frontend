@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <title>HW01 Repository</title>
     <link href="css/style.css" rel="stylesheet" />
+    <script src="js/script.js"></script>
 </head>
 <body>
 <header>
@@ -14,22 +15,71 @@
 </header>
 <article>
     <section id="up_block">
-        <h5>Вы вошли в систему как Иванов Иван Иванович</h5>
+        <h6>Вы вошли в систему как Иванов Иван Иванович. <a href="login.html">Выйти.</a> </h6>
     </section>
     <aside id="left_block">
-
+        <p><b>Можно загружать:</b><br>
+            ZIP (до 20Mb)<br>
+            DOCX (до 40Mb)<br>
+            PPTX (до 50Mb)<br><br>
+            <b>Использовано:</b><br>
+            27.34 Mb из 100.0 Mb</p>
     </aside>
 
     <section id="center">
+        <div id="loginform"> </div>
 
+        <div id="mainform">
+            <table id="myTable">
+                <tr>
+                    <th width="55%" onclick="sortTable(0)">Файл</th>
+                    <th width="17%" onclick="sortTable(1)">Размер (Kb)</th>
+                    <th width="30%" onclick="sortTable(2)">Дата и время</th>
+                    <th>Удалить</th>
+                </tr>
+                <tr>
+                    <td><a href="">Это архив с русским именем.zip</a> </td>
+                    <td>132.22</td>
+                    <td>2014.02.28 18:01:15</td>
+                    <td><a href="#" onclick="rowDel(this)">Удалить</a> </td>
+                </tr>
+                <tr>
+                    <td><a href="">_www_app.zip</a> </td>
+                    <td>132.45</td>
+                    <td>2014.02.28 18:24:54</td>
+                    <td><a href="#" onclick="rowDel(this)">Удалить</a> </td>
+                </tr>
+            </table>
+
+            <fieldset id="load_file">
+                <label id="label_load">Загрузить новый файл:</label><br>
+                <input type="file" value="Выбрать" name="choose_file_text"><br>
+                <input type="submit" value="Загрузить"><br>
+            </fieldset>
+            <fieldset id="load_file2">
+                <label id="label_server">Запросить с удаленного сервера:</label><br>
+                <input type="text" name="choose_file_text"><br>
+
+                <label id="label_repo">Поместить в хранилище:</label><br>
+                <input type="checkbox" name="remember" id="input_checkbox"><br>
+                <input type="button" value="Запросить" name="choose"  id="input_poll"><br>
+            </fieldset>
+        </div>
     </section>
 
     <aside id="right_block">
-        <p>Статистика:</p>
+        <p><b>Статистика</b><br>
+            Пользователей: 123<br>
+            Файлов: 1234<br>
+            Объём: 2345 Mb<br>
+            Объём/польз.: 45 Мб</p>
     </aside>
 </article>
 <footer>
     ©2017 EP, RD HTML Training
 </footer>
+
+
+
 </body>
 </html>
