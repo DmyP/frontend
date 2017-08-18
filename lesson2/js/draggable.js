@@ -2,8 +2,8 @@ window.addEventListener("load", init, false);
 
 function init()
 {
-    var elem = document.getElementById("element");
-    elem.addEventListener("mousedown", function (e) {drag(this, e)});
+    var elem = document.getElementById("ball");
+    elem.addEventListener("mousedown", function(e) {drag(this, e)});
 }
 function drag(elementToDrag, event) {
     var startX = event.clientX,
@@ -24,8 +24,8 @@ function drag(elementToDrag, event) {
     }
     function upHandler(e) {
         if(!e) e = window.event;
-        document.removeEventListener("mousemove", moveHandler, false);
-        document.removeEventListener("mouseup", upHandler, false);
+        document.removeEventListener("mouseup", upHandler, true);
+        document.removeEventListener("mousemove", moveHandler, true);
     }
 
 }
