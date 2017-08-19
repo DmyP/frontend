@@ -1,18 +1,21 @@
+canvas {
+    padding-left: 0;
+    padding-right: 0;
+    margin: auto;
+    border: 1px solid #d3d3d3;
+    display: block;
+    width: 90vw;
+    height: 60vw;
+    background: url("../png/background.jpg") no-repeat;
+    background-size: 90vw;
+}
+
 #ball {
     position: absolute;
-    left: 50%;
-    top: 50%;
-    height: 100%;
-    width: 100%;
-    background-image: url("../png/ball.png");
-    background-repeat: no-repeat;
-}
-#net {
-    position: absolute;
-    left: 70%;
-    top: 70%;
-    height: 100%;
-    width: 100%;
-    background-image: url("../png/net.png");
-    background-repeat: no-repeat;
+    left: 60vw;
+    top: 10vh;
+    height: 5vw;
+    width: 5vw;
+    background: url("../png/ball.png") no-repeat;
+    background-size: 5vw;
 }

@@ -1,10 +1,14 @@
 window.addEventListener("load", init, false);
 
+var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth,
+    y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
+
 function init()
 {
-    var elem = document.getElementById("ball");
-    elem.addEventListener("mousedown", function(e) {drag(this, e)});
+    myGameArea.start();
+    addBall();
 }
+
 function drag(elementToDrag, event) {
     var startX = event.clientX,
         startY = event.clientY;
@@ -27,5 +31,22 @@ function drag(elementToDrag, event) {
         document.removeEventListener("mouseup", upHandler, true);
         document.removeEventListener("mousemove", moveHandler, true);
     }
+}
 
+
+
+var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = x - 100;
+        this.canvas.height = y - 100;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+    }
+};
+
+
+function addBall() {
+    var elem = document.getElementById("ball");
+    elem.addEventListener("mousedown", function(e) {drag(this, e)});
 }
