@@ -48,23 +48,6 @@ function validate(form) {
 
 }
 
-function validateEmail(inputText)
-{
-    var mailformat = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    if(mailformat.test(inputText))
-    {
-        document.loginForm.email.focus();
-        return true;
-    }
-    else
-    {
-        alert("You have entered an invalid email address!");
-        document.loginForm.email.focus();
-        return false;
-    }
-}
-/*
-
 function validateEmail(email) {
     var emailPattern = /^[a-zA-Z0-9._-]{4,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     return emailPattern.test(email);

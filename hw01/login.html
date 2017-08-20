@@ -18,17 +18,33 @@
             <h6>Необходимо выполнить вход в систему</h6>
         </section>
         <aside id="left_block">
-
+            <b>Требование к емейлу:</b><br>
+            4+ буквы до @<br>
+            @ <br>
+            1+ после @ до .<br>
+            2-4 букв после .<br>
         </aside>
 
         <section id="center">
             <fieldset>
                 <form name="loginForm" action="index.html">
-                    <label for="email">Логин:</label>
+                    <label for="email">Е-мейл:</label>
                         <!--<input id="email" name="email" pattern="^[a-zA-Z0-9._-]{4,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" title="Type correct email" required><br>-->
-                        <input id="email" name="email" pattern="^[a-zA-Z0-9._-]{4,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" title="Type correct email" required><br>
+                        <input id="email"
+                               name="email"
+                               pattern="^[а-яА-Яa-zA-Z0-9._-]{4,}@[а-яА-Яa-zA-Z0-9.-]+\.([а-яА-Яa-zA-Z0-9.-]+\.)?[а-яА-Яa-zA-Z]{2,4}$"
+                               title="Требование к емейлу:
+    4+ буквы до @
+    @
+    1+ после @ до .
+    2-4 букв после ."
+                               required
+                               onclick="validateEmail(this)"><br>
                     <label for="password">Пароль:</label>
-                        <input id="password" type="password" name="password" required><br><br>
+                        <input id="password"
+                               type="password"
+                               name="password"
+                               required><br><br>
                     <label for="remember">Запомнить:</label>
                         <input type="checkbox" id="remember" name="remember"><br><br>
                     <label></label><input type="submit" value="Войти" required/>

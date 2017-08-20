@@ -14,7 +14,7 @@ label{
 h3
 {
     text-align:center;
-    margin: 1vmin 1vmin 1vmin 1vmin;
+
     font-size: 2.5vmin;
 }
 h6
@@ -83,12 +83,7 @@ tr:hover {background-color: #aaaaaa
     text-align: right;
 }
 
-#left_block{
-    width: 20%;
-    display: flex;
-    height: 80vh;
-    float: left;
-}
+
 
 #center
 {
@@ -101,9 +96,15 @@ tr:hover {background-color: #aaaaaa
     height: 80vh;
 }
 #right_block{
-    display: flex;
     float: left;
     height: 80vh;
     width: 20%;
 
+}
+
+#left_block{
+    margin: 1vmin 1vmin 1vmin 1vmin;
+    width: 20%;
+    height: 80vh;
+    float: left;
 }
