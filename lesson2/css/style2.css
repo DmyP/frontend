@@ -1,4 +1,4 @@
-canvas {
+#gameCanvas {
     padding-left: 0;
     padding-right: 0;
     margin-left: 15vw;
@@ -6,8 +6,6 @@ canvas {
     border: 1px solid #d3d3d3;
     width: 70vw;
     height: 49vw;
-    background: url("../png/background.jpg") no-repeat;
-    background-size: 70vw;
 }
 
 #ball {
@@ -16,6 +14,6 @@ canvas {
     top: 10vh;
     height: 4vw;
     width: 4vw;
-    background: url("../png/balls/ball.png") no-repeat;
+    background: url("../png/ball.png") no-repeat;
     background-size: 4vw;
 }

@@ -1,103 +1,104 @@
-(function() {
+var canvas;
+var canvasContext;
+var ballX = 500;
+var ballY = 200;
+var gravity = 2;
+var directionDown = true;
+var lastHeight = ballY;
+var maxY;
+var ballSpeedY = 10;
 
-    window.requestAnimationFrame = function(){
-        return window.requestAnimationFrame ||
-            window.webkitRequestAnimationFrame ||
-            window.mozRequestAnimationFrame ||
-            window.msRequestAnimationFrame ||
-            window.oRequestAnimationFrame ||
-            function(f){
-            window.setTimeout(f,1e3/60)}}();
+var bg_img = new Image();
+var ball_img = new Image();
+bg_img.src = "png/bg1280-900.png";
+ball_img.src = "png/ball.png";
 
-    var canvas = document.querySelector('canvas');
-    var ctx = canvas.getContext('2d');
-    var W = canvas.width = window.innerWidth;
-    var H = canvas.height = window.innerHeight;
+window.onload = function () {
+    canvas = document.getElementById('gameCanvas');
+    canvasContext = canvas.getContext('2d');
+    maxY = canvas.height - 110;
+    setInterval(startGame, 25);
+    canvas.addEventListener('mousedown', function(evt) {
+        var mousePos = getMousePos(canvas, evt);
+        if (mousePos.x > ballX  && mousePos.x < ballX  + 100 && mousePos.y > ballY && mousePos.y < ballY + 100) {
+        console.log('Mouse position: ' + mousePos.x + ',' + mousePos.y);
+            dragBall(canvas, evt);
+        }
+    }, false)
+};
 
-    // Velocity x
-    var vx = 0;
-    // Velocity y
-    var vy = 20;
+function writeMessage(canvas, message) {
+    var context = canvas.getContext('2d');
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.font = '18pt Calibri';
+    context.fillStyle = 'black';
+    context.fillText(message, 10, 25);
+}
 
-    var gravity = 0.3;
-    // Bounce Factor is the force with which
-    // the ball should rebound. 1 means 100%
-    // 0.1 means 10%, so on ...
-    var bounce_factor = 0.9;
+function startGame(){
+    moveEverything();
+    drawEverything();
+}
+function moveEverything() {
+    if ((lastHeight < canvas.height * 2)) {
 
-    function Ball() {
-        this.radius = 50;
-        this.x = canvas.width / 2;
-        this.y = canvas.height - this.radius;
-
-
-        this.draw = function(ctx) {
-            ctx.beginPath();
-
-            ctx.arc(
-                this.x,
-                this.y,
-                this.radius,
-                0,
-                Math.PI*2,
-                false
-            );
-
-            var img = new Image();
-            img.src = 'png/balls/ball.png';
-            var pattern = ctx.createPattern(img, 'repeat');
-            ctx.fillStyle = pattern;
-
-            ctx.fill();
-            ctx.closePath();
+        if (ballY < maxY) {
+            ballY = ballY + ballSpeedY;
+        }
+        if (ballY >= maxY) {
+            ballSpeedY = -ballSpeedY;
+            ballY = ballY + ballSpeedY;
+            lastHeight = lastHeight * gravity;
+            ballSpeedY += 1;
+        }
+        if (ballY < lastHeight) {
+            ballSpeedY = -ballSpeedY;
+            ballSpeedY -= 1;
         }
     }
+}
 
-    var ball = new Ball();
+function drawEverything() {
+    console.log("down ? " + directionDown + " ball y " + ballY + " lastHigh " + lastHeight + " ballSpeedY " + ballSpeedY);
+    var pattern_bg = canvasContext.createPattern(bg_img, 'repeat');
+    canvasContext.rect(0, 0, canvas.width, canvas.height);
+    canvasContext.fillStyle = pattern_bg;
+    canvasContext.fill();
+    canvasContext.drawImage(ball_img, ballX, ballY);
+}
 
-    (function renderFrame() {
-        requestAnimationFrame(renderFrame);
-        ctx.clearRect(0, 0, W, H);
+function getMousePos(canvas, evt) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+        x: evt.clientX - rect.left,
+        y: evt.clientY - rect.top
+    };
+}
 
-        vy += gravity;
+function dragBall(elementToDrag, event) {
+    var origX = elementToDrag.offsetLeft,
+        origY = elementToDrag.offsetTop;
 
-        ball.x += vx;
-        ball.y += vy;
+    var deltaX = origX + 50,
+        deltaY = origY + 50 ;
 
-        // ball.y + ball.radius > canvas.height
-        // The above check most probably causes
-        // vy to decrease over time. Thats why a
-        // bounce factor of 1 doesnt really make ball
-        // bounce upto where it started forever.
-        //
-        // As usual, we can CHEAT :D
-        // Save the vy in a tmp variable when this if
-        // condition is hit for the first time.
-        // From next time, assign that tmp var
-        // to vy, done!
+    document.addEventListener("mousemove", moveHandler, true);
+    document.addEventListener("mouseup", upHandler, true);
 
-        if (
-            ball.x + ball.radius > canvas.width ||
-            ball.x - ball.radius < 0 ||
-            ball.y + ball.radius > canvas.height// ||
-        //ball.y - ball.radius  < 0
-        ) {
+    function moveHandler(e) {
+        if(!e) e = window.event;
+        ballX = (e.clientX - 50);
+        ballY = (e.clientY - 50);
+        drawEverything();
+    }
+    function upHandler(e) {
+        if(!e) e = window.event;
 
-            // Re-positioning on the base ;)
-            ball.x = canvas.width / 2;
-            ball.y = canvas.height - ball.radius;
+        document.removeEventListener("mouseup", upHandler, true);
+        document.removeEventListener("mousemove", moveHandler, true);
+        ballSpeedY = 10;
+        lastHeight = ballY;
+        startGame();
+    }
+}
 
-            // If we do not re-set the velocities
-            // then the ball will stick to bottom :D
-
-            // Velocity x
-            vx = 0;
-            // Velocity y
-            // vy = (Math.random() * -15) - 5;
-            vy *= -bounce_factor;
-        }
-
-        ball.draw(ctx);
-    }());
-
-}());
