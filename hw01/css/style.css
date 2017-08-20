@@ -1,36 +1,77 @@
-﻿html
-{
-        background-color: white;
-}
-body
+﻿body
 {
     background-color: gainsboro;
     font-family: Arial, serif;
-    margin: 1vmin 1vmin 1vmin 1vmin;
 }
 
-header
-{
-    display: inline-block;
-    width: 100%;
-    color:black;
-    text-align:center;
-    font-size: 2vw;
-
-}
 label{
     display: inline-block;
-    width:40%;
+    width: 40%;
     text-align: right;
     font-size: 1.3vmin;
 }
 
-#input_firstname, #input_lastname
+h3
 {
-    display: inline-flex;
-    min-width: 5%;
-    max-width: 50%;
+    text-align:center;
+    margin: 1vmin 1vmin 1vmin 1vmin;
+    font-size: 2.5vmin;
+}
+h6
+{
+    margin: 0.1vmin 1vmin 0.1vmin 1vmin;
+    text-align: right;
+    font-size: 1.2vmin;
+}
 
+p, #login, #load_file, #load_file2, table
+{
+    margin: 1vmin 1vmin 1vmin 1vmin;
+    font-size: 1.2vmin;
+}
+
+fieldset
+{
+    margin: 1vmin 1vmin 1vmin 1vmin;
+    font-size: 1vmin;
+}
+
+footer
+{
+    border-top: 1px solid  #555555;
+    clear:both;
+    text-align:center;
+    padding:1vmin;
+}
+
+
+table {
+    border-collapse: collapse;
+    width: 98%;
+    font-size: 1.3vmin;
+}
+th
+{
+    text-align: center;
+    border-bottom: 1px solid #555555;
+    border-top: 1px solid #555555;
+
+}
+td {
+    text-align: left;
+    border-bottom: 1px solid #555555;
+    font-size: 1.3vmin;
+}
+
+tr:hover {background-color: #aaaaaa
+}
+
+#email:invalid , #password:invalid {
+    border: 1px dashed red;
+}
+
+#email:valid , #password:valid {
+    border: 1px solid black;
 }
 
 #up_block
@@ -65,62 +106,4 @@ label{
     height: 80vh;
     width: 20%;
 
-}
-p
-{
-    margin: 1vmin 1vmin 1vmin 1vmin;
-    font-size: 2vmin;
-}
-h3
-{
-    margin: 1vmin 1vmin 1vmin 1vmin;
-    font-size: 2.5vmin;
-}
-h6
-{
-    margin: 0.1vmin 1vmin 0.1vmin 1vmin;
-    text-align: right;
-    font-size: 1.5vmin;
-}
-
-p, #login, #load_file, #load_file2, table
-{
-    margin: 1vmin 1vmin 1vmin 1vmin;
-    font-size: 1.5vmin;
-}
-
-fieldset
-{
-    margin: 1vmin 1vmin 1vmin 1vmin;
-    font-size: 1vmin;
-}
-
-footer
-{
-    border-top: 1px solid  #555555;
-    clear:both;
-    text-align:center;
-    padding:1vmin;
-}
-
-
-table {
-    border-collapse: collapse;
-    width: 98%;
-    font-size: 1.5vmin;
-}
-th
-{
-    text-align: center;
-    border-bottom: 1px solid #555555;
-    border-top: 1px solid #555555;
-
-}
-td {
-    text-align: left;
-    border-bottom: 1px solid #555555;
-    font-size: 1.3vmin;
-}
-
-tr:hover {background-color: #aaaaaa
 }
