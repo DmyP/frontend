@@ -1,27 +1,29 @@
-var canvas;
-var canvasContext;
-var ballX = 500;
-var ballY = 200;
-var gravityAbs = 150;
-var directionDown = true;
-var lastHeight = ballY;
-var maxY;
-var ballSpeedY = 20;
+var canvas,
+    canvasContext,
+    ballX = 500,
+    ballY = 200,
+    gravityAbs = 150,
+    directionDown = true,
+    lastHeight = ballY,
+    maxY,
+    ballSpeedY = 20,
+    ballSize = 70,
+    score = 0,
 
-var bg_img = new Image();
-var ball_img = new Image();
-bg_img.src = "png/bg1280-900.png";
-ball_img.src = "png/ball.png";
+    bg_img = new Image(),
+    ball_img = new Image();
+    bg_img.src = "png/bg1280-900.png";
+    ball_img.src = "png/ball.png";
 
 window.onload = function () {
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
-    maxY = canvas.height - 110;
+    maxY = canvas.height - ballSize;
     setInterval(startGame, 25);
     canvas.addEventListener('mousedown', function(evt) {
         var mousePos = getMousePos(canvas, evt);
         if (mousePos.x > ballX  && mousePos.x < ballX  + 100 && mousePos.y > ballY && mousePos.y < ballY + 100) {
-        console.log('Mouse position: ' + mousePos.x + ',' + mousePos.y);
+
             dragBall();
         }
     }, false)
@@ -59,7 +61,7 @@ function drawEverything() {
     canvasContext.rect(0, 0, canvas.width, canvas.height);
     canvasContext.fillStyle = pattern_bg;
     canvasContext.fill();
-    canvasContext.drawImage(ball_img, ballX, ballY);
+    canvasContext.drawImage(ball_img, ballX, ballY, ballSize, ballSize);
 }
 
 function getMousePos(canvas, evt) {
