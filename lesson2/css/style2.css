@@ -1,19 +1,5 @@
-#gameCanvas {
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: 15vw;
-
-    border: 1px solid #d3d3d3;
-    width: 70vw;
-    height: 49vw;
-}
-
-#ball {
-    position: absolute;
-    left: 60vw;
-    top: 10vh;
-    height: 4vw;
-    width: 4vw;
-    background: url("../png/ball.png") no-repeat;
-    background-size: 4vw;
+html, body {
+    width:  100%;
+    height: 100%;
+    margin: 0px;
 }

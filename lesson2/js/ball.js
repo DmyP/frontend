@@ -1,12 +1,12 @@
 var canvas,
     canvasContext,
-    ballX = 500,
-    ballY = 200,
-    gravityAbs = 150,
-    directionDown = true,
-    lastHeight = ballY,
+    ballX,
+    ballY,
+    gravityAbs,
+    directionDown,
+    lastHeight,
     maxY,
-    ballSpeedY = 20,
+    ballSpeedY,
     ballSize = 70,
     score = 0,
 
@@ -16,22 +16,38 @@ var canvas,
     ball_img.src = "png/ball.png";
 
 window.onload = function () {
-    canvas = document.getElementById('gameCanvas');
-    canvasContext = canvas.getContext('2d');
-    maxY = canvas.height - ballSize;
-    setInterval(startGame, 25);
+    drawCanvas();
+    resetBall();
+    setInterval(moveAndDraw, 25);
     canvas.addEventListener('mousedown', function(evt) {
         var mousePos = getMousePos(canvas, evt);
-        if (mousePos.x > ballX  && mousePos.x < ballX  + 100 && mousePos.y > ballY && mousePos.y < ballY + 100) {
-
+        if (mousePos.x > ballX  && mousePos.x < ballX  + ballSize && mousePos.y > ballY && mousePos.y < ballY + ballSize) {
             dragBall();
         }
     }, false)
 };
 
-function startGame(){
+function drawCanvas() {
+    canvas = document.getElementById('gameCanvas');
+    canvasContext = canvas.getContext('2d');
+    canvasContext.canvas.width  = window.innerWidth - 50;
+    canvasContext.canvas.height = window.innerHeight - 50;
+}
+
+function resetBall() {
+    ballX = canvas.width / 2;
+    ballY  = canvas.height / 2;
+    lastHeight = ballY;
+    gravityAbs = 150;
+    directionDown = true;
+    ballSpeedY = 20;
+    maxY = canvas.height - ballSize;
+}
+
+function moveAndDraw(){
     moveEverything();
     drawEverything();
+    detectCollision();
 }
 
 function moveEverything() {
@@ -72,6 +88,10 @@ function getMousePos(canvas, evt) {
     };
 }
 
+function detectCollision() {
+
+}
+
 function dragBall() {
     document.addEventListener("mousemove", moveHandler, true);
     document.addEventListener("mouseup", upHandler, true);
@@ -89,7 +109,8 @@ function dragBall() {
         document.removeEventListener("mousemove", moveHandler, true);
         ballSpeedY = 20;
         lastHeight = ballY;
-        startGame();
+        moveAndDraw();
+
     }
 }
 
