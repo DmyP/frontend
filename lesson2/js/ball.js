@@ -31,8 +31,8 @@ window.onload = function () {
 function drawCanvas() {
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
-    canvasContext.canvas.width  = window.innerWidth - 50;
-    canvasContext.canvas.height = window.innerHeight - 50;
+    canvasContext.canvas.width  = 1200;
+    canvasContext.canvas.height = 800;
 }
 
 function resetBall() {
