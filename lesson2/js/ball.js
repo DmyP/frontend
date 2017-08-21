@@ -2,11 +2,11 @@ var canvas;
 var canvasContext;
 var ballX = 500;
 var ballY = 200;
-var gravity = 2;
+var gravityAbs = 150;
 var directionDown = true;
 var lastHeight = ballY;
 var maxY;
-var ballSpeedY = 10;
+var ballSpeedY = 20;
 
 var bg_img = new Image();
 var ball_img = new Image();
@@ -22,39 +22,34 @@ window.onload = function () {
         var mousePos = getMousePos(canvas, evt);
         if (mousePos.x > ballX  && mousePos.x < ballX  + 100 && mousePos.y > ballY && mousePos.y < ballY + 100) {
         console.log('Mouse position: ' + mousePos.x + ',' + mousePos.y);
-            dragBall(canvas, evt);
+            dragBall();
         }
     }, false)
 };
-
-function writeMessage(canvas, message) {
-    var context = canvas.getContext('2d');
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.font = '18pt Calibri';
-    context.fillStyle = 'black';
-    context.fillText(message, 10, 25);
-}
 
 function startGame(){
     moveEverything();
     drawEverything();
 }
-function moveEverything() {
-    if ((lastHeight < canvas.height * 2)) {
 
+function moveEverything() {
+    if(ballSpeedY > 1) {
         if (ballY < maxY) {
             ballY = ballY + ballSpeedY;
-        }
-        if (ballY >= maxY) {
-            ballSpeedY = -ballSpeedY;
-            ballY = ballY + ballSpeedY;
-            lastHeight = lastHeight * gravity;
-            ballSpeedY += 1;
-        }
-        if (ballY < lastHeight) {
-            ballSpeedY = -ballSpeedY;
+        } else if (ballY >= maxY) {
             ballSpeedY -= 1;
+            ballSpeedY = -ballSpeedY;
+            lastHeight = lastHeight + gravityAbs;
         }
+    } else if (ballSpeedY < -1) {
+        if (ballY > lastHeight) {
+            ballY = ballY + ballSpeedY;
+        } else if (ballY <= lastHeight){
+            ballSpeedY += 1;
+            ballSpeedY = -ballSpeedY;
+        }
+    } else {
+        ballSpeedY = 0;
     }
 }
 
@@ -75,13 +70,7 @@ function getMousePos(canvas, evt) {
     };
 }
 
-function dragBall(elementToDrag, event) {
-    var origX = elementToDrag.offsetLeft,
-        origY = elementToDrag.offsetTop;
-
-    var deltaX = origX + 50,
-        deltaY = origY + 50 ;
-
+function dragBall() {
     document.addEventListener("mousemove", moveHandler, true);
     document.addEventListener("mouseup", upHandler, true);
 
@@ -96,7 +85,7 @@ function dragBall(elementToDrag, event) {
 
         document.removeEventListener("mouseup", upHandler, true);
         document.removeEventListener("mousemove", moveHandler, true);
-        ballSpeedY = 10;
+        ballSpeedY = 20;
         lastHeight = ballY;
         startGame();
     }
