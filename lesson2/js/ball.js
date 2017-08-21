@@ -42,7 +42,7 @@ function resetBall() {
     gravityAbs = 200;
     directionDown = true;
     ballSpeedY = 20;
-    maxY = canvas.height - ballSize;
+    maxY = canvas.height - 80;
 }
 
 function moveAndDraw(){
@@ -53,7 +53,7 @@ function moveAndDraw(){
 }
 
 function drawBackground() {
-    var pattern_bg = canvasContext.createPattern(bg_img, 'repeat');
+    var pattern_bg = canvasContext.createPattern(bg_img, 'no-repeat');
     canvasContext.rect(0, 0, canvas.width, canvas.height);
     canvasContext.fillStyle = pattern_bg;
     canvasContext.fill();
@@ -86,6 +86,7 @@ function moveBallVertically() {
         } else if (ballY <= lastHeight){
             ballSpeedY += 1;
             ballSpeedY = -ballSpeedY;
+            lastHeight = lastHeight + gravityAbs;
         }
     } else {
         ballSpeedY = 0;
@@ -120,8 +121,7 @@ function dragBall() {
         ballY = (e.clientY - 50);
         moveAndDraw();
     }
-    function upHandler(e) {
-        if(!e) e = window.event;
+    function upHandler() {
         document.removeEventListener("mouseup", upHandler, true);
         document.removeEventListener("mousemove", moveHandler, true);
         ballSpeedY = 20;
