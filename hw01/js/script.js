@@ -1,3 +1,4 @@
+
 function sortTable(n) {
     var switchcount = 0;
     var table = document.getElementById("myTable");
@@ -40,55 +41,81 @@ function sortTable(n) {
 }
 
 
+
 function checkForm(form)
 {
-    if(form.email.value == "") {
-        alert("Error: email cannot be blank!");
-        form.email.focus();
-        return false;
+    var email = form.email.value.trim();
+    var pass = form.password.value.trim();
+    regex_email = /((?=[A-zА-я]+[0-9]*)|(?=[0-9]*[A-zА-я]+))([A-zА-я0-9-_.]{4,20})@([A-zА-я]{2,5}\.)([A-zА-я]{2,5}\.)*([A-zА-я]{2,5})/;
+    regex_length = /^.{8,}$/;
+    regex_dog = /(?=[@])/;
+    regex_dot = /(?=[.])/;
+    regex_lengthBeforeDog = /^\w{4,}@\w.*$/;
+    regex_digitsBeforeDog = /^\d{4,}@\w.*$/;
+    regex_lengthAfterDog = /^\w{4,}@\w{2,5}.\w{2,5}$/;
+
+    regex_passLength = /^.{8,20}$/;
+    regex_passUpperCase = /(?=.*[A-Z])/;
+    regex_passLowerCase = /(?=.*[a-z])/;
+    regex_passCharacters = /(?=.*[~!@#$%^&*()_+\-=`;:'"|]{3,5})/;
+
+    var message = "";
+    var emailFlag = true;
+    var passFlag = true;
+    if(!regex_length.test(email)) {
+        message +="Email must  be longer than 8 symbols\n";
+        emailFlag = false;
     }
-    re = /(?=.+[A-Za-zА-Яа-я])([0-9A-Za-zА-Яа-я\.\-]){4,30}@[\dA-Za-zА-ЯІЇЄа-яіїє]{2,30}(\.[\dA-Za-zА-ЯІЇЄа-яіїє]{2,5})?\.[\dA-Za-zА-ЯІЇЄа-яіїє]{2,5}/;
-    if(!re.test(form.email.value)) {
-        alert("Error: Username must contain only letters, numbers and underscores!");
-        form.email.focus();
-        return false;
+    if(!regex_dog.test(email)) {
+        message +="Email must contain @\n";
+        emailFlag = false;
+    }
+    if(!regex_dot.test(email)) {
+        message +="Email must contain at least one '.'\n";
+        emailFlag = false;
+    }
+    if(!regex_lengthBeforeDog.test(email)) {
+        message +=
+            "Email must contain at least 4 symbols before '@'\n";
+        emailFlag = false;
+    }
+    if(regex_digitsBeforeDog.test(email)) {
+        message +=
+            "Email must have at least one character before '@'\n";
+        emailFlag = false;
+    }
+    if(!regex_lengthAfterDog.test(email)) {
+        message +=
+            "Email must have  - 2 to 5 symbols after '@' and before '.'\n" +
+            "Email must have  - 2 to 5 symbols after '.'";
+        emailFlag = false;
     }
 
-    if(form.password.value != "") {
-        if(form.password.value.length < 6) {
-            alert("Error: Password must contain at least six characters!");
-            form.password.focus();
-            return false;
-        }
-        if(form.password.value == form.username.value) {
-            alert("Error: Password must be different from Username!");
-            form.password.focus();
-            return false;
-        }
-        re = /[0-9]/;
-        if(!re.test(form.password.value)) {
-            alert("Error: password must contain at least one number (0-9)!");
-            form.password.focus();
-            return false;
-        }
-        re = /[a-z]/;
-        if(!re.test(form.password.value)) {
-            alert("Error: password must contain at least one lowercase letter (a-z)!");
-            form.password.focus();
-            return false;
-        }
-        re = /[A-Z]/;
-        if(!re.test(form.password.value)) {
-            alert("Error: password must contain at least one uppercase letter (A-Z)!");
-            form.password.focus();
-            return false;
-        }
+    if(!regex_passLength.test(pass)) {
+        message +=
+            "Password length must be from 8 to 20 characters\n";
+        passFlag = false;
+    }
+    if(!regex_passLowerCase.test(pass)) {
+        message +=
+            "Password must have at least one character lower case\n";
+        passFlag = false;
+    }
+    if(!regex_passUpperCase.test(pass)) {
+        message +=
+            "Password must have at least one character upper case\n";
+        passFlag = false;
+    }
+    if(!regex_passCharacters.test(pass)) {
+        message +=
+            "Password length must have from 3 to 5 characters ~!@#$%^&*()_+-=`;:'\\\"|\n";
+        passFlag = false;
+    }
+    if((emailFlag) && (passFlag)){
+        alert("Everything is correct, logging in....");
+        return true;
     } else {
-        alert("Error: Please check that you've entered and confirmed your password!");
-        form.password.focus();
+        alert(message);
         return false;
     }
-
-    alert("You entered a valid password: " + form.password.value);
-    return true;
 }

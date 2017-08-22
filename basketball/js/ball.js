@@ -31,8 +31,8 @@ window.onload = function () {
 function drawCanvas() {
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
-    canvasContext.canvas.width  = window.innerWidth;
-    canvasContext.canvas.height = window.innerHeight;
+    canvasContext.canvas.width  = window.innerWidth - 50;
+    canvasContext.canvas.height = window.innerHeight - 50;
 }
 
 function resetBall() {
@@ -104,7 +104,7 @@ function detectCollision() {
         console.log("x " + ballX + "y " + ballY);
         if ((240 < ballX) && (ballX < 260)) {
             if ((240 < ballY) && (ballY < 260)) {
-                setTimeout(drawWin, 600);
+                setTimeout(drawWin, 200);
             }
         }
     }

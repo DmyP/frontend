@@ -8,9 +8,9 @@
 </head>
 <body>
     <header>
-        <h3> <img src="folder.png" alt="Folder Icon" width="20" height="20">
+        <h3> <img src="png/folder.png" alt="Folder Icon" width="20" height="20">
             Файловое хранилище V 0.01 (потеряй свои файлы красиво! ;) )
-            <img src="folder.png" alt="Folder Icon" width="20" height="20">
+            <img src="png/folder.png" alt="Folder Icon" width="20" height="20">
         </h3>
     </header>
 <article>
@@ -25,15 +25,9 @@
             <fieldset>
                 <form name="loginForm" onsubmit="return checkForm(this)" action="index.html" >
                     <label for="email">Е-мейл:</label>
-                        <!--<input id="email" name="email" pattern="^[a-zA-Z0-9._-]{4,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" title="Type correct email" required><br>-->
-                        <input id="email"
-                               name="email"
-                               pattern="^([а-яА-Яa-zA-Z._-]\+[0-9]?]){4,}@[а-яА-Яa-zA-Z0-9.-]+\.([а-яА-Яa-zA-Z0-9.-]+\.)?[а-яА-Яa-zA-Z]{2,4}$" required><br>
+                        <input id="email" name="email" required><br>
                     <label for="password">Пароль:</label>
-                        <input id="password"
-                               type="password"
-                               name="password"
-                               required><br><br>
+                        <input id="password" name="password" type="password" required><br><br>
                     <label for="remember">Запомнить:</label>
                         <input type="checkbox" id="remember" name="remember"><br><br>
                     <label></label><input type="submit" value="Войти" required/>
