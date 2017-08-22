@@ -67,11 +67,11 @@ tr:hover {background-color: #aaaaaa
 }
 
 #email:invalid , #password:invalid {
-    border: 1px dashed red;
+    border: 1px dashed firebrick;
 }
 
 #email:valid , #password:valid {
-    border: 1px solid black;
+    border: 1px solid green;
 }
 
 #up_block

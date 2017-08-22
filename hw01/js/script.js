@@ -47,7 +47,7 @@ function checkForm(form)
         form.email.focus();
         return false;
     }
-    re = /^\w+$/;
+    re = /(?=.+[A-Za-zА-Яа-я])([0-9A-Za-zА-Яа-я\.\-]){4,30}@[\dA-Za-zА-ЯІЇЄа-яіїє]{2,30}(\.[\dA-Za-zА-ЯІЇЄа-яіїє]{2,5})?\.[\dA-Za-zА-ЯІЇЄа-яіїє]{2,5}/;
     if(!re.test(form.email.value)) {
         alert("Error: Username must contain only letters, numbers and underscores!");
         form.email.focus();

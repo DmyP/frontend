@@ -12,7 +12,7 @@ var canvas,
     buttonPressed = false,
     bg_img = new Image(),
     ball_img = new Image();
-    bg_img.src = "png/bg1280-900.png";
+    bg_img.src = "png/bg1280.png";
     ball_img.src = "png/ball.png";
 
 window.onload = function () {
@@ -31,8 +31,8 @@ window.onload = function () {
 function drawCanvas() {
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
-    canvasContext.canvas.width  = 1200;
-    canvasContext.canvas.height = 800;
+    canvasContext.canvas.width  = window.innerWidth;
+    canvasContext.canvas.height = window.innerHeight;
 }
 
 function resetBall() {
@@ -104,8 +104,7 @@ function detectCollision() {
         console.log("x " + ballX + "y " + ballY);
         if ((240 < ballX) && (ballX < 260)) {
             if ((240 < ballY) && (ballY < 260)) {
-                score += 1;
-                setTimeout(resetBall, 600);
+                setTimeout(drawWin, 600);
             }
         }
     }
@@ -147,8 +146,8 @@ function drawScore() {
 }
 
 function drawWin() {
-    canvasContext.globalAlpha = 1;
-    canvasContext.fillRect(0, 0, canvas.width, canvas.height);
-    canvasContext.globalAlpha = 1.0;
+    score += 1;
+    alert("You win");
+    resetBall();
 }
 
